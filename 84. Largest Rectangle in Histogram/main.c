@@ -55,7 +55,7 @@ int largestRectangleArea(int* heights, int heightsSize) {
             if(j < 0)
                 continue;
            
-            printf("%d, %d", i, j);
+            printf("%d, %d\n", i, j);
             int area = calcAreaNo0(heights + j, i - j + 1);
             if(area > max)
                 max = area;
@@ -77,6 +77,6 @@ int main()
 	int test[] = {2,1,5,6,2,3};
 	int max = largestRectangleArea(test, sizeof(test) / sizeof(int));
 	
-	printf("%d", max);
+	printf("%d\n", max);
 	return 0;
 }
