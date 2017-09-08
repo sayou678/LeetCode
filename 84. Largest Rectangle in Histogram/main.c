@@ -88,7 +88,7 @@ int largestRectangleArea(int* heights, int heightsSize) {
 }
 
 int main()
-{
+{       int i = 0;
 	int test[] = {9,0};
 	int max = largestRectangleArea(test, sizeof(test) / sizeof(int));
 	
@@ -108,5 +108,17 @@ int main()
         max = largestRectangleArea(test3, sizeof(test3) / sizeof(int));
 	
 	printf("%d\n", max);
-	return 0;
+
+        int test4[20000];
+	for(i = 0; i < 20000; i++)
+        {
+	    test4[i] = i;   
+        }
+        max = largestRectangleArea(test4, sizeof(test4) / sizeof(int));
+	
+	printf("%d\n", max);
+	
+
+
+        return 0;
 }
