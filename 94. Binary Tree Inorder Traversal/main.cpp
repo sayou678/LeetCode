@@ -1,4 +1,16 @@
 
+#include <stack>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cctype>
+#include <locale>
+#include <queue>
+#include <sstream>
+
+using namespace std;
+
 #include "cpp94.cpp"
 
 
