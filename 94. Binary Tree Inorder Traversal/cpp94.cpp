@@ -25,19 +25,72 @@ public:
 				node = node->left;
 			}
 			else
-			{
-				if(!s.empty())
-				{
-					node = s.top();
-					s.pop();
-					ret.push_back(node->val);					
-					node = node->right;
-				}                
+			{				
+				node = s.top();
+				s.pop();
+				ret.push_back(node->val);					
+				node = node->right;			              
 			}
 		}
 
 		return ret;
+	}
 
+	vector<int> preorderTraversal(TreeNode* root) 
+	{
+		stack<TreeNode *> s;
+		TreeNode *node = root;
+
+		vector<int> ret;
+		while(!s.empty() || node != NULL)
+		{
+			if(node != NULL)
+			{
+				s.push(node);
+				ret.push_back(node->val);	
+				node = node->left;
+			}
+			else
+			{				
+				node = s.top();
+				s.pop();									
+				node = node->right;			              
+			}
+		}
+		return ret;
+	}
+
+	vector<int> postorderTraversal(TreeNode* root) 
+	{
+		stack<TreeNode *> s;
+		TreeNode *node = root;
+		TreeNode *lastNodeVisited = NULL;
+		TreeNode *peekNode = NULL;
+
+		vector<int> ret;
+		while(!s.empty() || node != NULL)
+		{
+			if(node != NULL)
+			{
+				s.push(node);				
+				node = node->left;
+			}
+			else
+			{				
+				peekNode = s.top();
+				if (peekNode->right != NULL && peekNode->right != lastNodeVisited)
+				{
+					node = peekNode->right;
+				}
+				else
+				{	
+					ret.push_back(peekNode->val);
+					lastNodeVisited = peekNode;
+					s.pop();
+				}               
+			}
+		}
+		return ret;
 	}
 
 };
