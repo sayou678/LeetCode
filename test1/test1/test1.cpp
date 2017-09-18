@@ -17,6 +17,7 @@
 #include <list>
 #include <assert.h>
 using namespace std;
+
  
 
 #include <94. Binary Tree Inorder Traversal\cpp94.cpp>
@@ -60,7 +61,7 @@ typedef struct sList
 List * CreateList()
 {
 	List *list = (List *)malloc(sizeof(List));
-	assert(list != NUll);
+	assert(list != NULL);
 
 	list->head = NULL;
 	list->size = 0;
@@ -190,10 +191,15 @@ void test1()
 	Dump(list);
 }
 
+extern "C"
+{
+	void test99();
+};
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	
-   test1();
+   test99();
 
 	return 0;
 }
