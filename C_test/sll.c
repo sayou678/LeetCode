@@ -54,7 +54,7 @@ void addList(list *pList, char *str)
 
 int compare(char *str1, char *str2)
 {
-    while(*str1 != '\0' && str2 != '\0')
+    while(*str1 != '\0' && *str2 != '\0')
     {
         if(*str1 > *str2)
         {
@@ -75,12 +75,16 @@ int compare(char *str1, char *str2)
     {
         return 0;
     }
-    else 
+    else if(*str1 == '\0') 
     {
-        return *str1 == '\0';
+        return -1;
+    }
+    else
+    {
+        return 1;
     }
 }
-
+void dumpList(list *pList);
 void sort(list *pList)
 {
     
@@ -95,27 +99,34 @@ void sort(list *pList)
      for(; q != pList->head; )
      {
          node *preP = pList->head;
-         for(p = pList->head; p->next != q; p = p->next)
+         for(p = pList->head; p->next != q; )
          {
-             if(!compare(p->str, p->next->str))
+             if(compare(p->str, p->next->str) > 0)
              {
+                node *pNext = NULL;
                  // swap p and p->next
                  if(p == pList->head)
                  {
-                     node *pNext = p->next;
+                     pNext = p->next;
                      pList->head = pNext;
                      pList->head->next = p;
                      p->next = pNext->next;
                  }
                  else
                  {
-                     node *pNext = p->next;
+                     pNext = p->next;
                      preP->next = pNext;
                      p->next = pNext->next;
                      pNext->next = p;
                  }
+                preP = pNext;
              }
-             preP = p;
+             else
+             {
+                preP = p;
+                p = p->next;
+             }
+            dumpList(pList);
          }
          q = p; 
      }
