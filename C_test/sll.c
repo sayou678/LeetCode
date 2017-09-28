@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct Node
 {
@@ -55,9 +56,13 @@ int compare(char *str1, char *str2)
 {
     while(*str1 != '\0' && str2 != '\0')
     {
-        if(*str1 != *str2)
+        if(*str1 > *str2)
         {
-            return *str1 < *str2;
+            return 1;
+        }
+        else if(*str1 < *str2)
+        {
+            return -1;
         }
         else
         {
@@ -70,7 +75,7 @@ int compare(char *str1, char *str2)
     {
         return 0;
     }
-    else
+    else 
     {
         return *str1 == '\0';
     }
@@ -89,14 +94,28 @@ void sort(list *pList)
  
      for(; q != pList->head; )
      {
-         node *preP = NULL;
+         node *preP = pList->head;
          for(p = pList->head; p->next != q; p = p->next)
          {
              if(!compare(p->str, p->next->str))
              {
                  // swap p and p->next
- 
+                 if(p == pList->head)
+                 {
+                     node *pNext = p->next;
+                     pList->head = pNext;
+                     pList->head->next = p;
+                     p->next = pNext->next;
+                 }
+                 else
+                 {
+                     node *pNext = p->next;
+                     preP->next = pNext;
+                     p->next = pNext->next;
+                     pNext->next = p;
+                 }
              }
+             preP = p;
          }
          q = p; 
      }
