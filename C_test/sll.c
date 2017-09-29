@@ -109,8 +109,8 @@ void sort(list *pList)
                  {
                      pNext = p->next;
                      pList->head = pNext;
-                     pList->head->next = p;
                      p->next = pNext->next;
+                     pNext->next = p;
                  }
                  else
                  {
@@ -147,11 +147,13 @@ void dumpList(list *pList)
 		printf("%s\n", p->str);
 		p = p->next;
 	}
+
+    printf("dump complete.\n\n");
 }
 
 void test99()
 {
-	char *strList[] = {"Hello world", "apple", "food", "car", "house", "foot", "cup"};
+	char *strList[] = {"Hello world", "foodZZZZ", "apple", "food", "car", "house", "food", "foot", "cup"};
 
 	int i = 0;
 	list *lst = createList();
