@@ -52,6 +52,7 @@ void addList(list *pList, char *str)
 	}
 }
 
+/*
 int compare(char *str1, char *str2)
 {
     while(*str1 != '\0' && *str2 != '\0')
@@ -83,8 +84,15 @@ int compare(char *str1, char *str2)
     {
         return 1;
     }
+}*/
+
+
+int compare(char *str1, char *str2)
+{
+	return strcmp(str1, str2);
 }
 void dumpList(list *pList);
+/*
 void sort(list *pList)
 {
     
@@ -130,6 +138,134 @@ void sort(list *pList)
          }
          q = p; 
      }
+}*/
+
+
+/*
+void sort(list *pList)
+{
+	node *p, *q, *r;
+	char *tmp;
+
+	if (pList->head == NULL || pList->head->next == NULL)
+	{
+		return;
+	}
+
+	r = NULL;
+
+	while(r != pList->head)
+	{
+		p = pList->head; 
+		q = p->next;
+
+		while (q != r)
+		{
+			if (compare(p->str, q->str) > 0)
+			{
+				tmp = p->str;
+				p->str = q->str;
+				q->str = tmp;
+			}
+			p = p->next;
+			q= q->next;
+		}
+
+		r = p;
+	}
+}*/
+
+/*
+void sort(list *pList)
+{
+	node *p, *q;
+	char *tmp;
+
+	if (pList->head == NULL || pList->head->next == NULL)
+	{
+		return;
+	}
+	
+	for (p = pList->head; p != NULL; p = p->next)
+	{
+		for (q = p->next; q != NULL; q = q->next)
+		{
+			if (compare(p->str, q->str) > 0)
+			{
+				tmp = p->str;
+				p->str = q->str;
+				q->str = tmp;
+			}
+		}
+	}
+}*/
+
+node *merge(node *left, node* right)
+{
+	node tmp, *p;
+	p = &tmp;
+	while(left != NULL && right != NULL)
+	{
+		if (compare(left->str, right->str) > 0)
+		{
+			p->next = right;
+			p = p->next;
+			right = right->next;
+		}
+		else
+		{
+			p->next = left;
+			p = p->next;
+			left = left->next;
+		}
+	}
+
+	if (left != NULL)
+	{
+		p->next = left;
+	}
+
+	if (right != NULL)
+	{
+		p->next = right;
+	}
+
+	return tmp.next;
+}
+
+node* mergeSort(node *head)
+{
+	node *slow, *fast, *pre;
+	node *left, *right;
+	if (head == NULL || head->next == NULL)
+	{
+		return head;
+	}
+
+	slow = fast = head;
+	while (fast != NULL && fast->next != NULL)
+	{
+		pre = slow;
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+	pre->next = NULL;
+
+	left = mergeSort(head);
+	right = mergeSort(slow);
+
+	return merge(left, right);
+}
+
+// merge sort
+
+void sort(list *pList)
+{
+	node *head;
+	assert(pList != NULL);
+
+	head = mergeSort(pList->head);
+	pList->head = head;
 }
 
 void dumpList(list *pList)

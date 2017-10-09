@@ -1,10 +1,8 @@
-
 *.ncb
 *.exe
 *.pdb
 test1/test1/Release/BuildLog.htm
 test1/test1/Release/BuildLog.htm
-*.obj
 *.obj
 *.pch
 *.idb
