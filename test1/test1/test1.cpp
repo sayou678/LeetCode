@@ -191,16 +191,35 @@ void test1()
 	Dump(list);
 }
 
+void test11()
+{
+	char aa[10];
+	for (int i = 0; i < 10; i++)
+	{
+		aa[i] = 0x88;
+	}
+
+	int a = strcmp("AAA", "AAA");
+	a = strcmp("AAA", "ABC");
+	a = strcmp("AAA", "AAA11");
+	a = strcmp("BBB", "AAA");
+}
+
 extern "C"
 {
 	void test99();
+	void test88();
+	void test77();
+	void testSort();
 };
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	
-   test99();
-
+// 	test11();
+ 	test99();
+//	test88();
+//	test77();
+//	testSort();
 	return 0;
 }
 
